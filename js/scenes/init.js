@@ -69,16 +69,17 @@ export default class InitScene {
         text1.y = (app.screen.height / 2) - text1.height;
         rulesContainer.addChild(text1);
 
+        const text2 = new PIXI.Text('5 Hidden Dogs', textStyle);
+        text2.anchor.set(0.5);
+        text2.x = (app.screen.width / 2);
+        text2.y = (app.screen.height / 2) - text2.height * 2.5;
+        rulesContainer.addChild(text2);
+
         const dogSprite = PIXI.Sprite.from('../../assets/doggy.png');
         dogSprite.anchor.set(0.5);
         dogSprite.scale.x *= -1;
-        dogSprite.position.set((app.screen.width / 2) + (text1.width / 2), (text1.height * 2.5));
+        dogSprite.position.set((app.screen.width / 2) + (text1.width / 2), (app.screen.height / 2) - text2.height * 2.5);
         rulesContainer.addChild(dogSprite);
-
-        const text2 = new PIXI.Text('5 Hidden Dogs', textStyle);
-        text2.x = (app.screen.width / 2) - (text2.width / 2) - dogSprite.width /2;
-        text2.y = (app.screen.height / 2) - text2.height * 2.5;
-        rulesContainer.addChild(text2);
 
         this._initContainer.addChild(rulesContainer);
     }
