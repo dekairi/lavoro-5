@@ -49,7 +49,6 @@ export default class InitScene {
             strokeThickness: 4,
         });
         buttonText.anchor.set(0.5);
-        buttonText.position.set(playNowButtonContainer.width / 2, playNowButtonContainer.height / 2);
         playNowButtonContainer.addChild(buttonText);
 
         playNowButtonContainer.on('pointerdown', this._onButtonPlayClick.bind(this));

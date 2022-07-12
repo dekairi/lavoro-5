@@ -19,8 +19,6 @@ export default class GameScene {
         const mainBackgroundSprite = PIXI.Sprite.from('../../assets/back_five_dogs.jpg');
         mainBackgroundSprite.position.set(app.screen.width / 2, app.screen.height / 2);
         mainBackgroundSprite.anchor.set(0.5);
-        mainBackgroundSprite.scale.x = Math.min(app.screen.width / mainBackgroundSprite.width);
-        mainBackgroundSprite.scale.y = Math.min(app.screen.height / mainBackgroundSprite.height);
         this._gameContainer.addChild(mainBackgroundSprite);
         this.makeHidden();
 
@@ -70,7 +68,7 @@ export default class GameScene {
             gameAreaContainer.addChild(itemContainer);
         }
 
-        gameAreaContainer.y = app.screen.height / 2;
+        gameAreaContainer.y = app.screen.height / 2.5;
         gameAreaContainer.x = app.screen.width / 2 - 100;
         gameAreaContainer.pivot.set(gameAreaContainer.width / 2, gameAreaContainer.height / 2);
         this._gameContainer.addChild(gameAreaContainer);
@@ -85,8 +83,6 @@ export default class GameScene {
         playNowButtonContainer.interactive = true;
         playNowButtonContainer.buttonMode = true;
         buttonPlay.anchor.set(0.5);
-        buttonPlay.width = 281;
-        buttonPlay.height = 113;
         playNowButtonContainer.addChild(buttonPlay);
 
         const buttonText = new PIXI.Text('Play Now!', {
@@ -97,7 +93,6 @@ export default class GameScene {
             strokeThickness: 4,
         });
         buttonText.anchor.set(0.5);
-        buttonText.position.set(playNowButtonContainer.width / 2, playNowButtonContainer.height / 2);
         playNowButtonContainer.addChild(buttonText);
 
         playNowButtonContainer.on('pointerdown', this._onButtonPlayClick.bind(this));

@@ -2,6 +2,7 @@ import InitScene from './scenes/init.js';
 import app from './config.js'
 import { Constants } from './constants.js';
 import GameScene from './scenes/game.js';
+import WinScene from './scenes/win.js';
 
 const States = {
     INIT: 0,
@@ -13,6 +14,7 @@ export class GameManager {
     constructor() {
         this._initScene = null;
         this._gameScene = null;
+        this._winScene = null;
         this._state = null;
         this._timeInitGame = Constants.TIME_INIT_SCENE;
         this._counterToWin = 0;
@@ -53,9 +55,9 @@ export class GameManager {
                 break;
             case States.GAME:
                 if (!this._gameScene) {
+                    this._initScene.makeHidden();
                     this._gameScene = new GameScene(this);
                     const gameContainer = this._gameScene.getGameContainer();
-                    this._initScene.makeHidden();
                     this._gameScene.makeVisible();
                     app.stage.addChild(gameContainer);
                 } else {
@@ -65,10 +67,14 @@ export class GameManager {
                 }
                 break;
             case States.WIN:
-                if (!this.winScene) {
-                    this._gameScene.makeHidden();
+                if (!this._winScene) {
+                    this._gameScene.makeHidden()
+                    this._winScene = new WinScene();
+                    const winContainer = this._winScene.getWinContainer();
+                    this._winScene.makeVisible();
+                    app.stage.addChild(winContainer);
                 } else {
-
+                    // return to init after some time
                 }
                 break;
             default:
