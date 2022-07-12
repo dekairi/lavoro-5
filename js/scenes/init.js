@@ -3,22 +3,23 @@ import { Constants } from '../constants.js';
 
 export default class InitScene {
     constructor() {
-        this._backgroundContainer = null;
-        this._preloadScene();
+        this._initContainer = null;
+        this._loadScene();
     }
 
-    _preloadScene() {
-        this._backgroundContainer = new PIXI.Container();
-        this._backgroundContainer.width = app.screen.width;
-        this._backgroundContainer.height = app.screen.height;
-        this._backgroundContainer.x = app.screen.width / 2;
-        this._backgroundContainer.y = app.screen.height / 2;
-        this._backgroundContainer.pivot.set(app.screen.width / 2, app.screen.height / 2);
+    _loadScene() {
+        this._initContainer = new PIXI.Container();
+        this._initContainer.width = app.screen.width;
+        this._initContainer.height = app.screen.height;
+        this._initContainer.x = app.screen.width / 2;
+        this._initContainer.y = app.screen.height / 2;
+        this._initContainer.pivot.set(app.screen.width / 2, app.screen.height / 2);
 
         const mainBackgroundSprite = PIXI.Sprite.from('../../assets/back_five_dogs.jpg');
         mainBackgroundSprite.position.set(app.screen.width / 2, app.screen.height / 2);
         mainBackgroundSprite.anchor.set(0.5);
-        this._backgroundContainer.addChild(mainBackgroundSprite);
+        this._initContainer.addChild(mainBackgroundSprite);
+        this.makeHidden();
 
 
         const overlayContainer = new PIXI.Graphics();
@@ -26,33 +27,33 @@ export default class InitScene {
         overlayContainer.drawRoundedRect(app.screen.width / 2, app.screen.height / 2, app.screen.width, app.screen.height, 16);
         overlayContainer.pivot.set(overlayContainer.width / 2, overlayContainer.height / 2);
         overlayContainer.endFill();
-        this._backgroundContainer.addChild(overlayContainer);
+        this._initContainer.addChild(overlayContainer);
 
-        this.playNowButtonContainer = new PIXI.Container();
-        this.playNowButtonContainer.width = 281;
-        this.playNowButtonContainer.height = 113;
-        this.playNowButtonContainer.x = app.screen.width / 2;
-        this.playNowButtonContainer.y = app.screen.height - 150;
+        const playNowButtonContainer = new PIXI.Container();
+        playNowButtonContainer.width = 281;
+        playNowButtonContainer.height = 113;
+        playNowButtonContainer.x = app.screen.width / 2;
+        playNowButtonContainer.y = app.screen.height - 150;
 
-        this.buttonPlay = PIXI.Sprite.from('../../assets/btn.png');
-        this.playNowButtonContainer.interactive = true;
-        this.playNowButtonContainer.buttonMode = true;
-        this.buttonPlay.anchor.set(0.5);
-        this.playNowButtonContainer.addChild(this.buttonPlay);
+        const buttonPlay = PIXI.Sprite.from('../../assets/btn.png');
+        playNowButtonContainer.interactive = true;
+        playNowButtonContainer.buttonMode = true;
+        buttonPlay.anchor.set(0.5);
+        playNowButtonContainer.addChild(buttonPlay);
 
-        this.ButtonText = new PIXI.Text('Play Now!', {
+        const buttonText = new PIXI.Text('Play Now!', {
             fontFamily: 'Roboto',
             fontSize: 32,
             fill: '#FCF0AA',
             stroke: 'black',
             strokeThickness: 4,
         });
-        this.ButtonText.anchor.set(0.5);
-        this.ButtonText.position.set(this.playNowButtonContainer.width / 2, this.playNowButtonContainer.height / 2);
-        this.playNowButtonContainer.addChild(this.ButtonText);
+        buttonText.anchor.set(0.5);
+        buttonText.position.set(playNowButtonContainer.width / 2, playNowButtonContainer.height / 2);
+        playNowButtonContainer.addChild(buttonText);
 
-        this.playNowButtonContainer.on('pointerdown', this.onButtonPlayClick.bind(this));
-        this._backgroundContainer.addChild(this.playNowButtonContainer);
+        playNowButtonContainer.on('pointerdown', this._onButtonPlayClick.bind(this));
+        this._initContainer.addChild(playNowButtonContainer);
 
         const rulesContainer = new PIXI.Container();
         const textStyle = new PIXI.TextStyle({
@@ -80,23 +81,22 @@ export default class InitScene {
         text2.y = (app.screen.height / 2) - text2.height * 2.5;
         rulesContainer.addChild(text2);
 
-        this._backgroundContainer.addChild(rulesContainer);
+        this._initContainer.addChild(rulesContainer);
     }
 
-    getInitContainer() {
-        return this._backgroundContainer;
-    }
-
-    makeVisible() {
-        this._backgroundContainer.visible = true;
-    }
-
-    makeHidden() {
-        this._backgroundContainer.visible = false;
-    }
-
-    onButtonPlayClick() {
+    _onButtonPlayClick() {
         window.location = Constants.URL;
     }
 
+    getInitContainer() {
+        return this._initContainer;
+    }
+
+    makeVisible() {
+        this._initContainer.visible = true;
+    }
+
+    makeHidden() {
+        this._initContainer.visible = false;
+    }
 }
