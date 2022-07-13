@@ -19,7 +19,7 @@ export default class GameScene {
         this._gameContainer.y = app.screen.height / 2;
         this._gameContainer.pivot.set(app.screen.width / 2, app.screen.height / 2);
 
-        this._mainBackgroundSprite = PIXI.Sprite.from('../../assets/back_five_dogs.jpg');
+        this._mainBackgroundSprite = PIXI.Sprite.from('assets/back_five_dogs.jpg');
         this._mainBackgroundSprite.height = app.screen.height;
         this._mainBackgroundSprite.width = app.screen.height * 1075 / 767;
         this._mainBackgroundSprite.position.set(app.screen.width / 2, app.screen.height / 2);
@@ -32,19 +32,19 @@ export default class GameScene {
 
         for (let i = 0; i < Constants.ITEMS_TO_FIND; i++) {
             const itemContainer = new PIXI.Container();
-            const itemSprite = PIXI.Sprite.from('../../assets/doggy.png');
+            const itemSprite = PIXI.Sprite.from('assets/doggy.png');
             itemSprite.scale.x = itemSprite.scale.y = Math.min(100 / itemSprite.width, 100 / itemSprite.height);
             itemSprite.anchor.set(0.5);
 
             const circleAnimationArray = [
-                PIXI.Texture.from('../../assets/circle_1.png'),
-                PIXI.Texture.from('../../assets/circle_2.png'),
-                PIXI.Texture.from('../../assets/circle_3.png'),
-                PIXI.Texture.from('../../assets/circle_4.png'),
-                PIXI.Texture.from('../../assets/circle_5.png'),
-                PIXI.Texture.from('../../assets/circle_6.png'),
-                PIXI.Texture.from('../../assets/circle_7.png'),
-                PIXI.Texture.from('../../assets/circle_8.png')
+                PIXI.Texture.from('assets/circle_1.png'),
+                PIXI.Texture.from('assets/circle_2.png'),
+                PIXI.Texture.from('assets/circle_3.png'),
+                PIXI.Texture.from('assets/circle_4.png'),
+                PIXI.Texture.from('assets/circle_5.png'),
+                PIXI.Texture.from('assets/circle_6.png'),
+                PIXI.Texture.from('assets/circle_7.png'),
+                PIXI.Texture.from('assets/circle_8.png')
             ];
 
             const animationSprite = new PIXI.AnimatedSprite(circleAnimationArray);
@@ -85,7 +85,7 @@ export default class GameScene {
         this._playNowButtonContainer.x = app.screen.width / 2;
         this._playNowButtonContainer.y = app.screen.height - 150;
 
-        const buttonPlay = PIXI.Sprite.from('../../assets/btn.png');
+        const buttonPlay = PIXI.Sprite.from('assets/btn.png');
         this._playNowButtonContainer.interactive = true;
         this._playNowButtonContainer.buttonMode = true;
         buttonPlay.anchor.set(0.5);

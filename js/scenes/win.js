@@ -23,7 +23,7 @@ export default class WinScene {
         this._winContainer.y = app.screen.height / 2;
         this._winContainer.pivot.set(app.screen.width / 2, app.screen.height / 2);
 
-        this._mainBackgroundSprite = PIXI.Sprite.from('../../assets/back_five_dogs.jpg');
+        this._mainBackgroundSprite = PIXI.Sprite.from('assets/back_five_dogs.jpg');
         this._mainBackgroundSprite.height = app.screen.height;
         this._mainBackgroundSprite.width = app.screen.height * 1075 / 767;
         this._mainBackgroundSprite.position.set(app.screen.width / 2, app.screen.height / 2);
@@ -63,7 +63,7 @@ export default class WinScene {
             lineJoin: 'round',
         });
 
-        this._characterSprite = PIXI.Sprite.from('../../assets/char.png');
+        this._characterSprite = PIXI.Sprite.from('assets/char.png');
         this._characterSprite.anchor.set(0.5);
         this._characterSprite.height = app.screen.height / 1.5;
         this._characterSprite.width = Math.floor(this._characterSprite.height * 477 / 844); // saving proportions
@@ -80,7 +80,7 @@ export default class WinScene {
         this._textBravo.y = (app.screen.height / 2) - (this._textBravo.height / 2) - 50;
         this._elementsContainer.addChild(this._textBravo);
 
-        this._logoSprite = PIXI.Sprite.from('../../assets/logo.png');
+        this._logoSprite = PIXI.Sprite.from('assets/logo.png');
         this._logoSprite.anchor.set(0.5);
         this._logoSprite.width = app.screen.width / 2.5;
         this._logoSprite.height = Math.floor(this._logoSprite.width * 285 / 518); // saving proportions
@@ -95,7 +95,7 @@ export default class WinScene {
         this._playNowButtonContainer.x = app.screen.width / 2;
         this._playNowButtonContainer.y = app.screen.height - 150;
 
-        const buttonPlay = PIXI.Sprite.from('../../assets/btn.png');
+        const buttonPlay = PIXI.Sprite.from('assets/btn.png');
         this._playNowButtonContainer.interactive = true;
         this._playNowButtonContainer.buttonMode = true;
         buttonPlay.anchor.set(0.5);

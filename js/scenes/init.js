@@ -22,7 +22,7 @@ export default class InitScene {
         this._initContainer.y = app.screen.height / 2;
         this._initContainer.pivot.set(app.screen.width / 2, app.screen.height / 2);
 
-        this._mainBackgroundSprite = PIXI.Sprite.from('../../assets/back_five_dogs.jpg');
+        this._mainBackgroundSprite = PIXI.Sprite.from('assets/back_five_dogs.jpg');
         this._mainBackgroundSprite.height = app.screen.height;
         this._mainBackgroundSprite.width = app.screen.height * 1075 / 767;
         this._mainBackgroundSprite.position.set(app.screen.width / 2, app.screen.height / 2);
@@ -44,7 +44,7 @@ export default class InitScene {
         this._playNowButtonContainer.x = app.screen.width / 2;
         this._playNowButtonContainer.y = app.screen.height - 150;
 
-        const buttonPlay = PIXI.Sprite.from('../../assets/btn.png');
+        const buttonPlay = PIXI.Sprite.from('assets/btn.png');
         this._playNowButtonContainer.interactive = true;
         this._playNowButtonContainer.buttonMode = true;
         buttonPlay.anchor.set(0.5);
@@ -84,7 +84,7 @@ export default class InitScene {
         this._text2.y = (app.screen.height / 2) - this._text2.height * 2.5;
         this._rulesContainer.addChild(this._text2);
 
-        this._dogSprite = PIXI.Sprite.from('../../assets/doggy.png');
+        this._dogSprite = PIXI.Sprite.from('assets/doggy.png');
         this._dogSprite.anchor.set(0.5);
         this._dogSprite.scale.x *= -1;
         this._dogSprite.position.set((app.screen.width / 2) + (this._text1.width / 2), (app.screen.height / 2) - this._text2.height * 2.5);
