@@ -4,7 +4,10 @@ import { Constants } from '../constants.js';
 export default class GameScene {
     constructor(gameManager) {
         this._gameContainer = null;
+        this._mainBackgroundSprite = null;
+        this._playNowButtonContainer = null;
         this._gameManager = gameManager;
+        this._itemContainersArray = [];
         this._loadScene();
     }
 
@@ -16,17 +19,19 @@ export default class GameScene {
         this._gameContainer.y = app.screen.height / 2;
         this._gameContainer.pivot.set(app.screen.width / 2, app.screen.height / 2);
 
-        const mainBackgroundSprite = PIXI.Sprite.from('../../assets/back_five_dogs.jpg');
-        mainBackgroundSprite.position.set(app.screen.width / 2, app.screen.height / 2);
-        mainBackgroundSprite.anchor.set(0.5);
-        this._gameContainer.addChild(mainBackgroundSprite);
+        this._mainBackgroundSprite = PIXI.Sprite.from('../../assets/back_five_dogs.jpg');
+        this._mainBackgroundSprite.height = app.screen.height;
+        this._mainBackgroundSprite.width = app.screen.height * 1075 / 767;
+        this._mainBackgroundSprite.position.set(app.screen.width / 2, app.screen.height / 2);
+        this._mainBackgroundSprite.anchor.set(0.5);
+        this._gameContainer.addChild(this._mainBackgroundSprite);
         this.makeHidden();
 
         const gameAreaContainer = new PIXI.Container();
         let itemsToFind = [];
 
         for (let i = 0; i < Constants.ITEMS_TO_FIND; i++) {
-            const itemContainer= new PIXI.Container();
+            const itemContainer = new PIXI.Container();
             const itemSprite = PIXI.Sprite.from('../../assets/doggy.png');
             itemSprite.scale.x = itemSprite.scale.y = Math.min(100 / itemSprite.width, 100 / itemSprite.height);
             itemSprite.anchor.set(0.5);
@@ -66,6 +71,7 @@ export default class GameScene {
 
             itemsToFind.push(itemToFind);
             gameAreaContainer.addChild(itemContainer);
+            this._itemContainersArray.push(itemContainer);
         }
 
         gameAreaContainer.y = app.screen.height / 2.5;
@@ -73,17 +79,17 @@ export default class GameScene {
         gameAreaContainer.pivot.set(gameAreaContainer.width / 2, gameAreaContainer.height / 2);
         this._gameContainer.addChild(gameAreaContainer);
 
-        const playNowButtonContainer = new PIXI.Container();
-        playNowButtonContainer.width = 281;
-        playNowButtonContainer.height = 113;
-        playNowButtonContainer.x = app.screen.width / 2;
-        playNowButtonContainer.y = app.screen.height - 150;
+        this._playNowButtonContainer = new PIXI.Container();
+        this._playNowButtonContainer.width = 281;
+        this._playNowButtonContainer.height = 113;
+        this._playNowButtonContainer.x = app.screen.width / 2;
+        this._playNowButtonContainer.y = app.screen.height - 150;
 
         const buttonPlay = PIXI.Sprite.from('../../assets/btn.png');
-        playNowButtonContainer.interactive = true;
-        playNowButtonContainer.buttonMode = true;
+        this._playNowButtonContainer.interactive = true;
+        this._playNowButtonContainer.buttonMode = true;
         buttonPlay.anchor.set(0.5);
-        playNowButtonContainer.addChild(buttonPlay);
+        this._playNowButtonContainer.addChild(buttonPlay);
 
         const buttonText = new PIXI.Text('Play Now!', {
             fontFamily: 'Roboto',
@@ -93,10 +99,10 @@ export default class GameScene {
             strokeThickness: 4,
         });
         buttonText.anchor.set(0.5);
-        playNowButtonContainer.addChild(buttonText);
+        this._playNowButtonContainer.addChild(buttonText);
 
-        playNowButtonContainer.on('pointerdown', this._onButtonPlayClick.bind(this));
-        this._gameContainer.addChild(playNowButtonContainer);
+        this._playNowButtonContainer.on('pointerdown', this._onButtonPlayClick.bind(this));
+        this._gameContainer.addChild(this._playNowButtonContainer);
 
         for (let i = 0; i < itemsToFind.length; i++) {
             itemsToFind[i].container.interactive = true;
@@ -132,5 +138,21 @@ export default class GameScene {
 
     makeHidden() {
         this._gameContainer.visible = false;
+    }
+
+    updateScreen() {
+        this._gameContainer.x = app.screen.width / 2;
+        this._gameContainer.y = app.screen.height / 2;
+        this._gameContainer.pivot.set(app.screen.width / 2, app.screen.height / 2);
+        this._mainBackgroundSprite.height = app.screen.height;
+        this._mainBackgroundSprite.position.set(app.screen.width / 2, app.screen.height / 2);
+
+        for (let i = 0; i < this._itemContainersArray.length; i++) {
+            this._itemContainersArray[i].x = Math.floor(Math.random() * (app.screen.width / 2 + 1));
+            this._itemContainersArray[i].y = Math.floor(Math.random() * (app.screen.height / 2 + 1));
+        }
+
+        this._playNowButtonContainer.x = app.screen.width / 2;
+        this._playNowButtonContainer.y = app.screen.height - 150;
     }
 }

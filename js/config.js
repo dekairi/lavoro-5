@@ -1,6 +1,6 @@
 const app = new PIXI.Application({
     backgroundAlpha: false,
-    resolution: window.devicePixelRatio,
+    resolution: window.devicePixelRatio
 });
 
 app.renderer.backgroundColor = 0x000000;

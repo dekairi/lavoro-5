@@ -29,6 +29,27 @@ export class GameManager {
             this.gameState = States.INIT;
         }
 
+        window.addEventListener("resize", function() {
+            // TODO: make check if the scene is loaded fully
+            app.renderer.resize(window.innerWidth, window.innerHeight);
+            app.view.style.width = window.innerWidth + "px";
+            app.view.style.height = window.innerHeight + "px";
+
+            switch(this.gameState) {
+                case States.INIT:
+                    this._initScene.updateScreen();
+                    break;
+                case States.GAME:
+                    this._gameScene.updateScreen();
+                    break;
+                case States.WIN:
+                    this._winScene.updateScreen();
+                    break;
+                default:
+                    break;
+            }
+        }.bind(this));
+
         this._state = this.update;
         app.ticker.add(delta => this.loop(delta));
     }
@@ -74,7 +95,7 @@ export class GameManager {
                     this._winScene.makeVisible();
                     app.stage.addChild(winContainer);
                 } else {
-                    // return to init after some time
+                    // TODO: return to init after some time
                 }
                 break;
             default:
