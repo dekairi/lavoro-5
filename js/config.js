@@ -1,5 +1,4 @@
 const app = new PIXI.Application({
-    backgroundAlpha: false,
     resolution: window.devicePixelRatio
 });
 
